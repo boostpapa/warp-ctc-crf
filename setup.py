@@ -11,7 +11,7 @@ import unittest
 import warnings
 from setuptools.command.build_ext import build_ext as orig_build_ext
 
-CUDA_HOME='/usr/local/cuda'
+CUDA_HOME='/aifs/tools/CUDA/cuda-10.0'
 den_dir = os.path.realpath("./gpu_den/build")
 ctc_dir = os.path.realpath("./gpu_ctc/build")
 

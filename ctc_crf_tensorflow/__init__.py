@@ -30,7 +30,7 @@ def ctc_crf_release_env(gpus):
   return _ctc_crf.ctc_crf_release(gpus)
 
 
-def ctc_crf_loss(time_major_logsoftmax, labels, input_lengths,
+def ctc_crf_loss(logits, labels, input_lengths,
                  blank_label=0, lamb=0.1):
   '''Computes the CTC loss between a sequence of logits and a
   ground truth labeling.
@@ -64,9 +64,11 @@ def ctc_crf_loss(time_major_logsoftmax, labels, input_lengths,
 
   '''
   # The input of the warp-ctc is modified to be the log-softmax output of the bottom neural network.
+  time_major_logsoftmax = logits
+  batch_major_logsoftmax = tf.transpose(logits, (1, 0, 2))
   log_likelihood_ctc, _, _, log_likelihood_den = _ctc_crf.ctc_crf_loss(
       time_major_logsoftmax,
-      array_ops.transpose(time_major_logsoftmax, (1, 0, 2)),
+      batch_major_logsoftmax,
       labels.indices,
       labels.values,
       input_lengths,

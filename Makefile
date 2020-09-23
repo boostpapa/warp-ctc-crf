@@ -15,5 +15,5 @@ PATHWEIGHT:
 	cd path_weight/build && cmake -D openfst_dir:STRING=${openfst_dir} ..
 	cd path_weight/build && make
 CTCCRF: GPUCTC GPUDEN PATHWEIGHT
-	python3 setup.py install
+	python setup.py install
 

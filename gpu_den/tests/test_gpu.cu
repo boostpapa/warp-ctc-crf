@@ -196,7 +196,7 @@ bool small_test() {
 }
 
 int main(void) {
-    const char fst_name[] = "/ark/repo/ctc_crf/egs/aishell/data/den_meta/den_lm.fst";
+    const char fst_name[] = "/aifs/users/wd007/asr/opensource/aishell/asr/cat/s1/data/den_meta/den_lm.fst";
     int gpus[4] = {0};
 
     throw_on_error(crfInit(fst_name, 1, gpus),
