@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*
+
 import imp
 import tensorflow as tf
 from tensorflow.python.framework import ops
@@ -64,8 +66,8 @@ def ctc_crf_loss(logits, labels, input_lengths,
 
   '''
   # The input of the warp-ctc is modified to be the log-softmax output of the bottom neural network.
-  time_major_logsoftmax = logits
-  batch_major_logsoftmax = tf.transpose(logits, (1, 0, 2))
+  batch_major_logsoftmax = logits
+  time_major_logsoftmax = tf.transpose(logits, (1, 0, 2))
   log_likelihood_ctc, _, _, log_likelihood_den = _ctc_crf.ctc_crf_loss(
       time_major_logsoftmax,
       batch_major_logsoftmax,
@@ -76,9 +78,9 @@ def ctc_crf_loss(logits, labels, input_lengths,
       blank_label)  # log_likelihood_ctc, grad_ctc, grad_den, log_likelihood_den
 
   if lamb >= 0:
-    return CRFLoss(log_likelihood_ctc, log_likelihood_den, lamb)
+    return CRFLoss(log_likelihood_ctc, log_likelihood_den, lamb), log_likelihood_ctc, log_likelihood_den
   else:
-    return -log_likelihood_ctc
+    return -log_likelihood_ctc, log_likelihood_ctc, log_likelihood_den
 
 
 @ops.RegisterGradient("CtcCrfLoss")

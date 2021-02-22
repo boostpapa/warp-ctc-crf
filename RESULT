@@ -1,0 +1,55 @@
+max_gpu: 1
+n_gpus: 2
+gpus[i]: 0
+gpus[i]: 1
+('Part loss: ', array([-4.7745047], dtype=float32))
+('Ctc loss: ', array([1.2], dtype=float32))
+('Den loss: ', array([-3.4545045], dtype=float32))
+[[[ 0.         -1.1         0.          0.          0.        ]]
+
+ [[ 0.          0.         -1.1         0.03239707  0.00285808]]]
+ [       OK ] CtcCrfTest.test_basic
+ [ RUN      ] CtcCrfTest.test_session
+ [  SKIPPED ] CtcCrfTest.test_session
+ ----------------------------------------------------------------------
+ Ran 2 tests in 1.573s
+
+ OK (skipped=1)
+
+
+ max_gpu: 1
+ n_gpus: 2
+ gpus[i]: 0
+ gpus[i]: 1
+ ('Part loss: ', array([-4.7745047], dtype=float32))
+ [[[ 0.         -1.1         0.          0.          0.        ]]
+
+  [[ 0.          0.         -1.1         0.03239707  0.00285808]]]
+  [       OK ] CtcCrfTest.test_basic
+  [ RUN      ] CtcCrfTest.test_session
+  [  SKIPPED ] CtcCrfTest.test_session
+  ----------------------------------------------------------------------
+  Ran 2 tests in 1.533s
+
+  OK (skipped=1)
+
+
+
+chuilun.dw@shenzhen:/aifs/users/wd007/speaker/data/tools/warp-ctc-crf$ ldd build/lib.linux-x86_64-2.7/ctc_crf_tensorflow/kernels.so 
+    linux-vdso.so.1 =>  (0x00007fffb4bd0000)
+    libcrf_fst_den.so => /aifs/users/wd007/speaker/data/tools/warp-ctc-crf/gpu_den/build/libcrf_fst_den.so (0x00007f945e55a000)
+    libcrf_warpctc.so => /aifs/users/wd007/speaker/data/tools/warp-ctc-crf/gpu_ctc/build/libcrf_warpctc.so (0x00007f945dee4000)
+    libtensorflow_framework.so.1 => not found
+    libpython2.7.so.1.0 => /aifs/users/wd007/software/miniconda3/envs/py27tf14hvd/lib/libpython2.7.so.1.0 (0x00007f945dcf2000)
+    libstdc++.so.6 => /aifs/users/wd007/software/miniconda3/envs/py27tf14hvd/lib/libstdc++.so.6 (0x00007f945db7d000)
+    libm.so.6 => /lib64/libm.so.6 (0x00007f945d87b000)
+    libgcc_s.so.1 => /aifs/users/wd007/software/miniconda3/envs/py27tf14hvd/lib/libgcc_s.so.1 (0x00007f945d867000)
+    libpthread.so.0 => /lib64/libpthread.so.0 (0x00007f945d64a000)
+    libc.so.6 => /lib64/libc.so.6 (0x00007f945d286000)
+    libfst.so.10 => /aifs/users/wd007/speaker/data/tools/fst/openfst/lib/libfst.so.10 (0x00007f945ca9f000)
+    libdl.so.2 => /lib64/libdl.so.2 (0x00007f945c89a000)
+    librt.so.1 => /lib64/librt.so.1 (0x00007f945c692000)
+    libgomp.so.1 => /aifs/users/wd007/software/miniconda3/envs/py27tf14hvd/lib/libgomp.so.1 (0x00007f945c665000)
+    libutil.so.1 => /lib64/libutil.so.1 (0x00007f945c461000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007f945e84e000)
+

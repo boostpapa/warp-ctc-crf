@@ -4,8 +4,8 @@ import torch.nn.functional as F
 import torch.nn as nn
 from torch.nn import Module
 import sys
-sys.path.append('../../src/ctc_crf')
-import ctc_crf_base
+sys.path.append('/aifs/users/wd007/decoder/opensource/cat/src/ctc_crf')
+import ctc_crf_base_1_0 as ctc_crf_base
 import numpy as np
 
 TARGET_GPUS = [0]
@@ -82,7 +82,7 @@ class CTC_CRF_LOSS(Module):
         _assert_no_grad(label_lengths)
         return self.ctc_crf(logits, labels, input_lengths, label_lengths, self.lamb, self.size_average)
 
-LM_PATH = '/work/pubrepo/CAT/egs/aishell/data/den_meta/den_lm.fst'
+LM_PATH = '/aifs/users/wd007/asr/opensource/aishell/asr/cat/s1/data/den_meta/den_lm.fst'
 # LM_PATH = '/data/203_data/datalist/CHN_PHV2/lm_for_ctc_crf/den_lm_20200401_v1_rmsil_uniq.fst'
 # LM_PATH = '/data/203_data/datalist/CHN_PHV2/lm_for_ctc_crf/den_lm_20200401_v1_uniq.fst'
 
@@ -109,8 +109,8 @@ class Model(nn.Module):
         labels = torch.cat(label_list)
         # netout, _ = self.net(logits, input_lengths)
         # netout = self.linear(netout)
-        netout = F.log_softmax(logits, dim=2)
-        loss = self.loss_fn(netout, labels, input_lengths, label_lengths)
+        #netout = F.log_softmax(logits, dim=2)
+        loss = self.loss_fn(logits, labels, input_lengths, label_lengths)
         return loss
 
 
